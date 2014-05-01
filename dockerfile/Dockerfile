@@ -45,7 +45,7 @@ RUN mkdir -p /home/student/.ssh; chown student /home/student/.ssh; chmod 700 /ho
  
 RUN echo "student ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN chown -r student:student /home/student
+RUN chown -R student:student /home/student
  
 # ssh stuff
 RUN apt-get install -y ssh
