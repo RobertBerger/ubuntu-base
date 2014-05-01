@@ -61,10 +61,10 @@ EXPOSE 22
 #ADD root/scripts /root/scripts
 
 # Set environment variables.
-ENV HOME /root
+ENV HOME /home/student
 
 # Define working directory.
-WORKDIR /root
+WORKDIR /home/student
 
 # fix sudo permissions
 RUN chmod u+s /usr/bin/sudo
