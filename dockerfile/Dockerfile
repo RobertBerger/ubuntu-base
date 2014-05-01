@@ -10,21 +10,21 @@ FROM ubuntu:14.04
 # Update OS.
 RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get -y upgrade
 
 # Install sudo
 RUN apt-get install -y sudo
-
 # fix sudo permissions
+RUN chmod u+s /usr/bin/sudo
+
+# upgrade
+RUN apt-get -y upgrade
+
+# fix sudo permissions - just in case
 RUN chmod u+s /usr/bin/sudo
 
 # Install basic packages.
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y curl git htop unzip vim wget
-RUN apt-get install -y sudo
-
-# fix sudo permissions
-RUN chmod u+s /usr/bin/sudo
 
 # Install puppet stuff
 RUN apt-get install -y puppet librarian-puppet
