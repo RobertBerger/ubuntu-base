@@ -22,8 +22,9 @@ RUN apt-get install -y puppet librarian-puppet
 # puppet-librarian stuff
 ADD /puppetfile/Puppetfile /
 RUN librarian-puppet install
-RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
-RUN puppet apply --modulepath=/modules -e "class { 'account': }"
+RUN puppet apply --modulepath=/modules -e "class { 'adamstrawson/puppet-byobu': }"
+RUN puppet apply --modulepath=/modules -e "class { 'torrancew/puppet-account': }"
+
 
 # Add files.
 ADD root/.bashrc /root/.bashrc

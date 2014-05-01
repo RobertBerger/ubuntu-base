@@ -1,4 +1,5 @@
-mod "byobu",
+mod "adamstrawson/puppet-byobu",
        :git => "https://github.com/adamstrawson/puppet-byobu"
-mod "account",
+
+mod "torrancew/puppet-account",
        :git => "https://github.com/torrancew/puppet-account"
