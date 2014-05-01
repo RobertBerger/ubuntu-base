@@ -68,3 +68,6 @@ ENV HOME /home/student
 
 # Define working directory.
 WORKDIR /home/student
+
+# default user
+USER student
