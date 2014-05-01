@@ -1,1 +1,1 @@
-docker build dockerfile/
+docker build -t reslocal/ubuntu-base dockerfile/
