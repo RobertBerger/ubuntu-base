@@ -16,6 +16,11 @@ RUN apt-get -y upgrade
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y curl git htop unzip vim wget
 
+# Install puppet stuff
+RUN apt-get install -y rubygems 
+RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+RUN gem install puppet librarian-puppet
+
 # Add files.
 ADD root/.bashrc /root/.bashrc
 ADD root/.gitconfig /root/.gitconfig
