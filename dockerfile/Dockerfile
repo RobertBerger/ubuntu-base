@@ -15,7 +15,7 @@ RUN apt-get -y upgrade
 # Install basic packages.
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y curl git htop unzip vim wget
-RUN apt-get install -y openssh-server sudo
+RUN apt-get install -y sudo
 
 # Install puppet stuff
 RUN apt-get install -y puppet librarian-puppet
@@ -38,9 +38,12 @@ RUN mkdir -p /home/student/.ssh; chown student /home/student/.ssh; chmod 700 /ho
  
 RUN echo "student ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
  
+# ssh stuff
+RUN apt-get install -y ssh
 RUN mkdir /var/run/sshd
-RUN /usr/sbin/sshd
- 
+#RUN /usr/sbin/sshd
+RUN /etc/init.d/ssh restart
+
 EXPOSE 22
  
 #CMD ["/usr/sbin/sshd", "-D"]
