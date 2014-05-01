@@ -60,12 +60,11 @@ EXPOSE 22
 #ADD root/.gitconfig /root/.gitconfig
 #ADD root/scripts /root/scripts
 
+# fix sudo permissions
+RUN chmod u+s /usr/bin/sudo
+
 # Set environment variables.
 ENV HOME /home/student
 
 # Define working directory.
 WORKDIR /home/student
-
-# fix sudo permissions
-RUN chmod u+s /usr/bin/sudo
-
