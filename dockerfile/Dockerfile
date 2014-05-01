@@ -27,12 +27,12 @@ RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
 #RUN puppet apply --modulepath=/modules -e "class { 'account': }"
 
 # create student
-RUN mkdir -p /home/docker
+RUN mkdir -p /home/student
  
 RUN useradd student
 RUN echo "student:student" | chpasswd
  
-RUN mkdir -p /home/student/.ssh; chown docker /home/student/.ssh; chmod 700 /home/student/.ssh
+RUN mkdir -p /home/student/.ssh; chown student /home/student/.ssh; chmod 700 /home/student/.ssh
 #ADD ./authorized_keys /home/student/.ssh/
 #ADD ./authorized_keys /student/.ssh/
  
