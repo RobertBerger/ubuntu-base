@@ -24,7 +24,7 @@ RUN apt-get install -y curl git htop unzip vim wget
 RUN apt-get install -y sudo
 
 # fix sudo permissions
-RUN chmod 4111 /usr/bin/sudo
+RUN chmod u+s /usr/bin/sudo
 
 # Install puppet stuff
 RUN apt-get install -y puppet librarian-puppet
