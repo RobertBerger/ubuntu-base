@@ -12,10 +12,19 @@ RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get -y upgrade
 
+# Install sudo
+RUN apt-get install -y sudo
+
+# fix sudo permissions
+RUN chmod 4111 /usr/bin/sudo
+
 # Install basic packages.
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y curl git htop unzip vim wget
 RUN apt-get install -y sudo
+
+# fix sudo permissions
+RUN chmod 4111 /usr/bin/sudo
 
 # Install puppet stuff
 RUN apt-get install -y puppet librarian-puppet
