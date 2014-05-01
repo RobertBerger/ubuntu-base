@@ -51,7 +51,7 @@ EXPOSE 22
 #ADD root/scripts /root/scripts
 
 # Set environment variables.
-ENV HOME /student
+ENV HOME /root
 
 # Define working directory.
-WORKDIR /student
+WORKDIR /root
