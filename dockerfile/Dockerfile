@@ -13,8 +13,6 @@ RUN apt-get update
 
 # Install sudo
 RUN apt-get install -y sudo
-# fix sudo permissions
-RUN chmod u+s /usr/bin/sudo
 
 # upgrade
 RUN apt-get -y upgrade
@@ -67,3 +65,7 @@ ENV HOME /root
 
 # Define working directory.
 WORKDIR /root
+
+# fix sudo permissions
+RUN chmod u+s /usr/bin/sudo
+
