@@ -1,0 +1,2 @@
+mod "byobu",
+       :git => "https://github.com/adamstrawson/puppet-byobu"

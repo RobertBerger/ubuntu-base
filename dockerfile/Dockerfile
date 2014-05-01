@@ -17,10 +17,12 @@ RUN apt-get install -y software-properties-common
 RUN apt-get install -y curl git htop unzip vim wget
 
 # Install puppet stuff
-#RUN apt-get install -y rubygems 
-#RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc
-#RUN gem install puppet librarian-puppet
 RUN apt-get install -y puppet librarian-puppet
+
+# puppet-librarian stuff
+ADD /puppetfile/Puppetfile /
+RUN librarian-puppet install
+RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
 
 # Add files.
 ADD root/.bashrc /root/.bashrc
