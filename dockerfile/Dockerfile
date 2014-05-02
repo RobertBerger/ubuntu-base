@@ -50,8 +50,7 @@ RUN chown -R student:student /home/student
 # ssh stuff
 RUN apt-get install -y ssh
 RUN mkdir /var/run/sshd
-#RUN /usr/sbin/sshd
-RUN /etc/init.d/ssh restart
+RUN /etc/init.d/ssh start
 
 EXPOSE 22
  
@@ -66,10 +65,14 @@ EXPOSE 22
 RUN chmod u+s /usr/bin/sudo
 
 # Set environment variables.
-ENV HOME /home/student
+ENV HOME /root
 
 # Define working directory.
-WORKDIR /home/student
+WORKDIR /root
 
 # default user
-USER student
+USER root
+
+ADD root/readme /root/run.sh
+RUN chmod +x /root/run.sh
+RUN /root/run.sh
