@@ -50,7 +50,6 @@ RUN chown -R student:student /home/student
 # ssh stuff
 RUN apt-get install -y ssh
 RUN mkdir /var/run/sshd
-RUN service ssh restart
 
 EXPOSE 22
  
@@ -73,6 +72,7 @@ WORKDIR /root
 # default user
 USER root
 
-ADD root/run.sh /root/run.sh
-RUN chmod +x /root/run.sh
-RUN /root/run.sh
+ADD ./bin /usr/local/sbin
+RUN chmod +x /usr/local/sbin/run
+CMD run
+
