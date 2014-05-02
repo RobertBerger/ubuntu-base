@@ -1,5 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 set -e
-service ssh restart
-cd /home/student
-su student
+
+if [ "$(id -u)" == "0" ]; then
+  unset SUDO
+else
+  SUDO=sudo 
+fi
+
+${SUDO} service ssh restart
+
+if [ "$(id -u)" == "0" ]; then
+  cd /home/student
+  su student
+fi
