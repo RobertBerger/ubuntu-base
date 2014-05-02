@@ -73,6 +73,6 @@ WORKDIR /root
 # default user
 USER root
 
-ADD root/readme /root/run.sh
+ADD root/run.sh /root/run.sh
 RUN chmod +x /root/run.sh
 RUN /root/run.sh
