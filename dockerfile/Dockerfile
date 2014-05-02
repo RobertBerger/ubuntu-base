@@ -50,7 +50,7 @@ RUN chown -R student:student /home/student
 # ssh stuff
 RUN apt-get install -y ssh
 RUN mkdir /var/run/sshd
-RUN /etc/init.d/ssh start
+RUN service ssh restart
 
 EXPOSE 22
  
