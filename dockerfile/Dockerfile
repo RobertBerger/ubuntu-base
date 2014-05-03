@@ -45,6 +45,11 @@ RUN mkdir -p /home/genius/.ssh; chown genius /home/genius/.ssh; chmod 700 /home/
  
 RUN echo "genius ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+# add genius specific config files
+ADD genius/.bashrc /home/genius/.bashrc
+ADD genius/.gitconfig /home/genius/.gitconfig
+ADD genius/scripts /home/genius/scripts
+
 RUN chown -R genius:genius /home/genius
  
 # ssh stuff
