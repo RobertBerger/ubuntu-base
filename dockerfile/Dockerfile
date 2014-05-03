@@ -33,19 +33,19 @@ RUN librarian-puppet install
 RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
 #RUN puppet apply --modulepath=/modules -e "class { 'account': }"
 
-# create student
-RUN mkdir -p /home/student
+# create genius
+RUN mkdir -p /home/genius
  
-RUN useradd student
-RUN echo "student:student" | chpasswd
+RUN useradd genius
+RUN echo "genius:genius" | chpasswd
  
-RUN mkdir -p /home/student/.ssh; chown student /home/student/.ssh; chmod 700 /home/student/.ssh
-#ADD ./authorized_keys /home/student/.ssh/
-#ADD ./authorized_keys /student/.ssh/
+RUN mkdir -p /home/genius/.ssh; chown genius /home/genius/.ssh; chmod 700 /home/genius/.ssh
+#ADD ./authorized_keys /home/genius/.ssh/
+#ADD ./authorized_keys /genius/.ssh/
  
-RUN echo "student ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN echo "genius ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN chown -R student:student /home/student
+RUN chown -R genius:genius /home/genius
  
 # ssh stuff
 RUN apt-get install -y ssh

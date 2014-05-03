@@ -1,1 +1,1 @@
-ssh student@reliableembeddedsystems/ubuntu-base:latest.docker 22
+ssh genius@reliableembeddedsystems/ubuntu-base:latest.docker 22

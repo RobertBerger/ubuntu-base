@@ -10,6 +10,6 @@ fi
 ${SUDO} service ssh restart
 
 if [ "$(id -u)" == "0" ]; then
-  cd /home/student
-  su student
+  cd /home/genius
+  su genius
 fi
