@@ -24,14 +24,15 @@ RUN chmod u+s /usr/bin/sudo
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y curl git htop unzip vim wget
 
+# --> we don't need puppet for now
 # Install puppet stuff
-RUN apt-get install -y puppet librarian-puppet
+#RUN apt-get install -y puppet librarian-puppet
 
 # puppet-librarian stuff
-ADD /puppetfile/Puppetfile /
-RUN librarian-puppet install
-RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
-#RUN puppet apply --modulepath=/modules -e "class { 'account': }"
+#ADD /puppetfile/Puppetfile /
+#RUN librarian-puppet install
+#RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
+# <-- we don't need puppet for now
 
 # create genius
 RUN mkdir -p /home/genius
@@ -52,11 +53,13 @@ ADD genius/scripts /home/genius/scripts
 
 RUN chown -R genius:genius /home/genius
  
+# --> I don't seem to get the ssh stuff to work
 # ssh stuff
 RUN apt-get install -y ssh
 RUN mkdir /var/run/sshd
 
 EXPOSE 22
+# <-- I don't seem to get the ssh stuff to work
  
 #CMD ["/usr/sbin/sshd", "-D"]
 
@@ -80,4 +83,3 @@ USER root
 ADD ./bin /usr/local/sbin
 RUN chmod +x /usr/local/sbin/run
 CMD run
-
