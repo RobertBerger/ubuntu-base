@@ -34,6 +34,10 @@ RUN apt-get install -y curl git htop unzip vim wget
 #RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
 # <-- we don't need puppet for now
 
+# --> instead of puppet 
+RUN apt-get install -y byobu
+# <-- instead of puppet
+
 # create genius
 RUN mkdir -p /home/genius
  
