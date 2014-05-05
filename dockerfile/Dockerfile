@@ -39,9 +39,7 @@ RUN apt-get install -y byobu
 # <-- instead of puppet
 
 # create genius
-RUN mkdir -p /home/genius
- 
-RUN useradd genius
+RUN useradd --create-home --home-dir /home/genius --shell /bin/bash genius
 RUN echo "genius:genius" | chpasswd
  
 RUN mkdir -p /home/genius/.ssh; chown genius /home/genius/.ssh; chmod 700 /home/genius/.ssh
