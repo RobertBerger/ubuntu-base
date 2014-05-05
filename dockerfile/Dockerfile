@@ -65,10 +65,10 @@ EXPOSE 22
  
 #CMD ["/usr/sbin/sshd", "-D"]
 
-# Add files.
-#ADD root/.bashrc /root/.bashrc
-#ADD root/.gitconfig /root/.gitconfig
-#ADD root/scripts /root/scripts
+# Add files for root - start run in /root/.bashrc
+ADD root/.bashrc /root/.bashrc
+ADD root/.gitconfig /root/.gitconfig
+ADD root/scripts /root/scripts
 
 # fix sudo permissions
 RUN chmod u+s /usr/bin/sudo
@@ -84,4 +84,4 @@ USER root
 
 ADD ./bin /usr/local/sbin
 RUN chmod +x /usr/local/sbin/run
-CMD run
+CMD ["/bin/bash"]

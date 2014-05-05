@@ -50,3 +50,6 @@ source ~/scripts/git-completion.sh
 
 # Z
 source ~/scripts/z.sh
+
+# run the run stuff
+/usr/local/sbin/run 
