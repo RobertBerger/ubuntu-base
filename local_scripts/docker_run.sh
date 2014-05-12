@@ -15,8 +15,16 @@ fi
 # sudo modprobe tun
 
 # run the image
-echo "+ ID=\$(docker run -i -t -d -p 22 --privileged ${IMAGE_NAME} /bin/bash)"
-ID=$(docker run -i -t -d -p 22 --privileged ${IMAGE_NAME} /bin/bash)
+#echo "+ ID=\$(docker run -i -t -d -p 22 --privileged ${IMAGE_NAME} /bin/bash)"
+#ID=$(docker run -i -t -d -p 22 --privileged ${IMAGE_NAME} /bin/bash)
+
+#echo "+ ID=\$(docker run --rm -t -i ${IMAGE_NAME} /sbin/my_init -- bash -l)"
+#ID=$(docker run --rm -t -i ${IMAGE_NAME} /sbin/my_init -- bash -l)
+
+echo "+ ID=\$(docker run -t -i -d -p 22 --privileged ${IMAGE_NAME} /sbin/my_init -- bash -l)"
+ID=$(docker run -t -i -d -p 22 --privileged ${IMAGE_NAME} /sbin/my_init -- bash -l)
+
+echo "+ ID ${ID}"
 
 # ssh stuff:
 PORT=$(docker port ${ID} 22 | awk -F':' '{ print $2 }')
@@ -27,3 +35,4 @@ echo "ssh genius@${IPADDR} -p ${PORT}"
 # let's attach to it:
 echo "+ docker attach ${ID}"
 docker attach ${ID}
+
