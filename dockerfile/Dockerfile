@@ -21,8 +21,8 @@ CMD ["/sbin/my_init"]
 # ...put your own build instructions here...
 # fix /usr/sbin/policy-rc.d
 # .I guess with puppet it would be too late
-#RUN echo exit 0 > /usr/sbin/policy-rc.d
-#RUN chmod +x /usr/sbin/policy-rc.d
+RUN echo exit 0 > /usr/sbin/policy-rc.d
+RUN chmod +x /usr/sbin/policy-rc.d
 
 # Update OS.
 RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
