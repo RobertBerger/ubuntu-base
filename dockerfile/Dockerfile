@@ -33,6 +33,13 @@ RUN apt-get -y upgrade
 
 # Install basic packages.
 RUN apt-get install -y software-properties-common
+
+# fix /usr/sbin/policy-rc.d again
+# .I guess with puppet it would be too late
+RUN echo exit 0 > /usr/sbin/policy-rc.d
+RUN chmod +x /usr/sbin/policy-rc.d
+
+# more basic images
 RUN apt-get install -y curl git htop unzip vim wget byobu
 
 # default scripts (will be used for all users except for root)
@@ -45,9 +52,9 @@ ADD etc_skel/.gitconfig /root/.gitconfig
 ADD etc_skel/scripts /root/scripts
 ADD etc_skel/.bashrc /root/.bashrc
 # we want to run automatically run the run script
-RUN echo " " >> /root/.bashrc
-RUN echo "# add the run stuff" >> /root/.bashrc
-RUN echo "/usr/local/sbin/run" >> /root/.bashrc
+#RUN echo " " >> /root/.bashrc
+#RUN echo "# add the run stuff" >> /root/.bashrc
+#RUN echo "/usr/local/sbin/run" >> /root/.bashrc
 
 # --> puppet
 # Install puppet stuff
@@ -65,6 +72,8 @@ RUN puppet apply --modulepath=/modules -e "class { 'yocto_users': ensure => pres
 #RUN puppet apply --modulepath=/modules -e "class { 'ssh::server': }"
 # <-- puppet
 
+# we need the /dev/net/tun interface for qemu
+RUN HERE=$(pwd)&&cd /dev&&MAKEDEV tun&&cd ${HERE}
 # <-- rber
 
 # Clean up APT when done.
