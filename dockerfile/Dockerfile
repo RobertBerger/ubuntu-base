@@ -1,87 +1,22 @@
-#
-# Ubuntu Dockerfile
-#
-# https://github.com/dockerfile/ubuntu
-#
+# Use phusion/baseimage as base image. To make your builds
+# reproducible, make sure you lock down to a specific version, not
+# to `latest`! See
+# https://github.com/phusion/baseimage-docker/blob/master/Changelog.md
+# for a list of version numbers.
+FROM phusion/baseimage:0.9.10
 
-# Pull base image.
-FROM ubuntu:14.04
-
-# Update OS.
-RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
-RUN apt-get update
-
-# Install sudo
-RUN apt-get install -y sudo
-
-# upgrade
-RUN apt-get -y upgrade
-
-# fix sudo permissions - just in case
-RUN chmod u+s /usr/bin/sudo
-
-# Install basic packages.
-RUN apt-get install -y software-properties-common
-RUN apt-get install -y curl git htop unzip vim wget
-
-# --> we don't need puppet for now
-# Install puppet stuff
-#RUN apt-get install -y puppet librarian-puppet
-
-# puppet-librarian stuff
-#ADD /puppetfile/Puppetfile /
-#RUN librarian-puppet install
-#RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
-# <-- we don't need puppet for now
-
-# --> instead of puppet 
-RUN apt-get install -y byobu
-# <-- instead of puppet
-
-# create genius
-RUN useradd --create-home --home-dir /home/genius --shell /bin/bash genius
-RUN echo "genius:genius" | chpasswd
- 
-RUN mkdir -p /home/genius/.ssh; chown genius /home/genius/.ssh; chmod 700 /home/genius/.ssh
-#ADD ./authorized_keys /home/genius/.ssh/
-#ADD ./authorized_keys /genius/.ssh/
- 
-RUN echo "genius ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-# add genius specific config files
-ADD genius/.bashrc /home/genius/.bashrc
-ADD genius/.gitconfig /home/genius/.gitconfig
-ADD genius/scripts /home/genius/scripts
-
-RUN chown -R genius:genius /home/genius
- 
-# --> I don't seem to get the ssh stuff to work
-# ssh stuff
-RUN apt-get install -y ssh
-RUN mkdir /var/run/sshd
-
-EXPOSE 22
-# <-- I don't seem to get the ssh stuff to work
- 
-#CMD ["/usr/sbin/sshd", "-D"]
-
-# Add files for root - start run in /root/.bashrc
-ADD root/.bashrc /root/.bashrc
-ADD root/.gitconfig /root/.gitconfig
-ADD root/scripts /root/scripts
-
-# fix sudo permissions
-RUN chmod u+s /usr/bin/sudo
-
-# Set environment variables.
+# Set correct environment variables.
 ENV HOME /root
 
-# Define working directory.
-WORKDIR /root
+# Regenerate SSH host keys. baseimage-docker does not contain any, so you
+# have to do that yourself. You may also comment out this instruction; the
+# init system will auto-generate one during boot.
+RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
-# default user
-USER root
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
 
-ADD ./bin /usr/local/sbin
-RUN chmod +x /usr/local/sbin/run
-CMD ["/bin/bash"]
+# ...put your own build instructions here...
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
