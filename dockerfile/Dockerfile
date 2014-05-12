@@ -77,4 +77,5 @@ RUN HERE=$(pwd)&&cd /dev&&MAKEDEV tun&&cd ${HERE}
 # <-- rber
 
 # Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# .not really we want to add more stuff based on this
+# RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
