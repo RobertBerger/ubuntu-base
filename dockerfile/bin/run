@@ -7,7 +7,19 @@ else
   SUDO=sudo 
 fi
 
-${SUDO} service ssh restart
+if [ ! -f /dev/net/tun ]; then
+  HERE=$(pwd)
+  ${SUDO} cd /dev
+  ${SUDO} MAKEDEV tun
+  cd ${HERE}
+fi
+
+if (( $(ps -ef | grep -v grep | grep ssh | wc -l) > 0 ))
+then
+  echo "ssh server is already up and running"
+else
+  ${SUDO} service ssh start
+fi
 
 if [ "$(id -u)" == "0" ]; then
   cd /home/genius
