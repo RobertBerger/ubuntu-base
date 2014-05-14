@@ -3,6 +3,9 @@ forge "http://forge.puppetlabs.com"
 #mod "adamstrawson/byobu",
 #       :git => "https://github.com/adamstrawson/puppet-byobu"
 
+mod "hercules-team/augeasproviders",
+       :git => "https://github.com/hercules-team/augeasproviders"
+       
 mod "torrancew/account",
        :git => "https://github.com/torrancew/puppet-account",
        :ref => 'v0.0.5'
