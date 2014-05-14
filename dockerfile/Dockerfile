@@ -21,7 +21,7 @@ RUN chmod +x /usr/sbin/policy-rc.d
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 # Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
+#CMD ["/sbin/my_init"]
 
 # --> rber
 
@@ -71,10 +71,10 @@ RUN apt-get install -y puppet librarian-puppet
 ADD /puppetfile/Puppetfile /
 RUN librarian-puppet install
 #RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
-# fix docker issues: (sudo permissions)
-RUN puppet apply --modulepath=/modules -e "class { 'docker_fixes': }"
 # configure ssh server
 RUN puppet apply --modulepath=/modules -e "class { 'ssh': }"
+# fix docker issues: (sudo permissions)
+RUN puppet apply --modulepath=/modules -e "class { 'docker_fixes': }"
 # create users: (genius, add to sudoers,..)
 RUN puppet apply --modulepath=/modules -e "class { 'yocto_users': ensure => present }"
 # ssh server: (I think there is a race condition with puppet)
@@ -88,3 +88,5 @@ RUN HERE=$(pwd)&&cd /dev&&MAKEDEV tun&&cd ${HERE}
 # Clean up APT when done.
 # .not really we want to add more stuff based on this
 # RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+CMD ["/sbin/my_init"]
