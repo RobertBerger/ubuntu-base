@@ -3,10 +3,16 @@
 # to `latest`! See
 # https://github.com/phusion/baseimage-docker/blob/master/Changelog.md
 # for a list of version numbers.
-FROM phusion/baseimage:0.9.10
+FROM phusion/baseimage:0.9.11
 
 # Set correct environment variables.
 ENV HOME /root
+
+# ...put your own build instructions here...
+# fix /usr/sbin/policy-rc.d
+# .I guess with puppet it would be too late
+RUN echo exit 0 > /usr/sbin/policy-rc.d
+RUN chmod +x /usr/sbin/policy-rc.d
 
 # Regenerate SSH host keys. baseimage-docker does not contain any, so you
 # have to do that yourself. You may also comment out this instruction; the
@@ -21,11 +27,11 @@ CMD ["/sbin/my_init"]
 # ...put your own build instructions here...
 # fix /usr/sbin/policy-rc.d
 # .I guess with puppet it would be too late
-RUN echo exit 0 > /usr/sbin/policy-rc.d
-RUN chmod +x /usr/sbin/policy-rc.d
+#RUN echo exit 0 > /usr/sbin/policy-rc.d
+#RUN chmod +x /usr/sbin/policy-rc.d
 
 # Update OS.
-#RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
+RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
 RUN apt-get update
 
 # upgrade
