@@ -36,10 +36,10 @@ RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
 RUN apt-get update
 
 # upgrade
-RUN apt-get -y upgrade
+# RUN apt-get -y upgrade
 
 # Install basic packages.
-RUN apt-get install -y software-properties-common
+# RUN apt-get install -y software-properties-common
 
 # fix /usr/sbin/policy-rc.d again
 # .I guess with puppet it would be too late
