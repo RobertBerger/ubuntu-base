@@ -3,7 +3,8 @@
 # to `latest`! See
 # https://github.com/phusion/baseimage-docker/blob/master/Changelog.md
 # for a list of version numbers.
-FROM phusion/baseimage:0.9.11
+#FROM phusion/baseimage:0.9.11
+FROM phusion/baseimage
 
 # Set correct environment variables.
 ENV HOME /root
