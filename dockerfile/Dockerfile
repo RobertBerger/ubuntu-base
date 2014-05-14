@@ -73,6 +73,8 @@ RUN librarian-puppet install
 #RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
 # fix docker issues: (sudo permissions)
 RUN puppet apply --modulepath=/modules -e "class { 'docker_fixes': }"
+# configure ssh server
+RUN puppet apply --modulepath=/modules -e "class { 'ssh': }"
 # create users: (genius, add to sudoers,..)
 RUN puppet apply --modulepath=/modules -e "class { 'yocto_users': ensure => present }"
 # ssh server: (I think there is a race condition with puppet)

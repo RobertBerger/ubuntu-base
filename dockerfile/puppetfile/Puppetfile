@@ -26,3 +26,5 @@ mod "RobertBerger/yocto_users",
 mod "RobertBerger/docker_fixes",
        :git => "https://github.com/RobertBerger/puppet-docker-fixes"
 
+mod "RobertBerger/ssh",
+       :git => "https://github.com/RobertBerger/puppet-ssh"
