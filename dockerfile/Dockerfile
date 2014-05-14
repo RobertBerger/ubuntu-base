@@ -25,7 +25,7 @@ RUN echo exit 0 > /usr/sbin/policy-rc.d
 RUN chmod +x /usr/sbin/policy-rc.d
 
 # Update OS.
-RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
+#RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
 RUN apt-get update
 
 # upgrade
