@@ -6,6 +6,7 @@ then
     echo "+ $0: Too few arguments!"
     echo "+ use something like:"
     echo "+ $0 <docker image> <network interface>" 
+    echo "+ $0 reslocal/ubuntu-base docker0"
     echo "+ $0 reslocal/ubuntu-base br0"
     exit
 fi
@@ -30,7 +31,7 @@ echo "+ ID ${ID}"
 PORT=$(docker port ${ID} 22 | awk -F':' '{ print $2 }')
 IPADDR=$(ifconfig ${NETWORK_INTERFACE} | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}')
 echo "+ ssh to the container like this:"
-echo "ssh genius@${IPADDR} -p ${PORT}"
+echo "ssh -X genius@${IPADDR} -p ${PORT}"
 
 # let's attach to it:
 echo "+ docker attach ${ID}"
