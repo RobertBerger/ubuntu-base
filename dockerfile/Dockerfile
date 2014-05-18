@@ -63,6 +63,10 @@ ADD etc_skel/.bashrc /root/.bashrc
 #RUN echo "# add the run stuff" >> /root/.bashrc
 #RUN echo "/usr/local/sbin/run" >> /root/.bashrc
 
+# --> xterm
+RUN apt-get install -y xauth xterm
+# <-- xterm
+
 # --> puppet
 # Install puppet stuff
 RUN apt-get install -y puppet librarian-puppet
@@ -80,10 +84,6 @@ RUN puppet apply --modulepath=/modules -e "class { 'yocto_users': ensure => pres
 # ssh server: (I think there is a race condition with puppet)
 #RUN puppet apply --modulepath=/modules -e "class { 'ssh::server': }"
 # <-- puppet
-
-# --> xterm
-RUN apt-get install -y xauth xterm
-# <-- xterm
 
 # we need the /dev/net/tun interface for qemu
 RUN HERE=$(pwd)&&cd /dev&&MAKEDEV tun&&cd ${HERE}
