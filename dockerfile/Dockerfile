@@ -82,7 +82,7 @@ RUN puppet apply --modulepath=/modules -e "class { 'yocto_users': ensure => pres
 # <-- puppet
 
 # --> xterm
-RUN apt-get install -y xterm
+RUN apt-get install -y xauth xterm
 # <-- xterm
 
 # we need the /dev/net/tun interface for qemu
