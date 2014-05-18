@@ -81,6 +81,10 @@ RUN puppet apply --modulepath=/modules -e "class { 'yocto_users': ensure => pres
 #RUN puppet apply --modulepath=/modules -e "class { 'ssh::server': }"
 # <-- puppet
 
+# --> xterm
+RUN apt-get install -y xterm
+# <-- xterm
+
 # we need the /dev/net/tun interface for qemu
 RUN HERE=$(pwd)&&cd /dev&&MAKEDEV tun&&cd ${HERE}
 # <-- rber
