@@ -58,6 +58,10 @@ ADD etc_skel/.bashrc /etc/skel/.bashrc
 ADD etc_skel/.gitconfig /root/.gitconfig
 ADD etc_skel/scripts /root/scripts
 ADD etc_skel/.bashrc /root/.bashrc
+
+# Add one time startup script to create tun interface for qemu
+ADD etc_my_init.d/01_create_tun.sh /etc/my_init.d/01_create_tun.sh
+
 # we want to run automatically run the run script
 #RUN echo " " >> /root/.bashrc
 #RUN echo "# add the run stuff" >> /root/.bashrc
@@ -85,8 +89,6 @@ RUN puppet apply --modulepath=/modules -e "class { 'yocto_users': ensure => pres
 #RUN puppet apply --modulepath=/modules -e "class { 'ssh::server': }"
 # <-- puppet
 
-# we need the /dev/net/tun interface for qemu
-RUN HERE=$(pwd)&&cd /dev&&MAKEDEV tun&&cd ${HERE}
 # <-- rber
 
 # Clean up APT when done.

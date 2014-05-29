@@ -12,8 +12,8 @@ then
 fi
 
 # enable TUN device (for qemu)
-# echo "+ sudo modprobe tun"
-# sudo modprobe tun
+echo "+ sudo modprobe tun"
+sudo modprobe tun
 
 # run the image
 #echo "+ ID=\$(docker run -i -t -d -p 22 --privileged ${IMAGE_NAME} /bin/bash)"
