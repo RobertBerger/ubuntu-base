@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+if [ "$(id -u)" == "0" ]; then
+  unset SUDO
+else
+  SUDO=sudo 
+fi
+
+${SUDO} service ssh restart
+
+if [ "$(id -u)" == "0" ]; then
+  cd /home/genius
+  su genius
+fi
