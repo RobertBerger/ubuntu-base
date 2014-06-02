@@ -1,8 +1,5 @@
 forge "http://forge.puppetlabs.com"
 
-#mod "adamstrawson/byobu",
-#       :git => "https://github.com/adamstrawson/puppet-byobu"
-
 mod "hercules-team/augeasproviders",
        :git => "https://github.com/hercules-team/augeasproviders"
        
@@ -16,12 +13,6 @@ mod "justinclayton/sudo",
 
 mod "RobertBerger/yocto_users",
        :git => "https://github.com/RobertBerger/puppet-yocto-users"
-
-#mod "saz/ssh",
-#       :git => "https://github.com/saz/puppet-ssh"
-
-#mod "attachmentgenie/ssh",
-#       :git => "https://github.com/attachmentgenie/puppet-module-ssh"
 
 mod "RobertBerger/docker_fixes",
        :git => "https://github.com/RobertBerger/puppet-docker-fixes"
