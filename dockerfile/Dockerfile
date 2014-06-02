@@ -7,81 +7,84 @@
 # Pull base image.
 FROM ubuntu:14.04
 
+# fix /usr/sbin/policy-rc.d
+# .I guess with puppet it would be too late
+RUN echo exit 0 > /usr/sbin/policy-rc.d
+RUN chmod +x /usr/sbin/policy-rc.d
+
 # Update OS.
 RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list
 RUN apt-get update
 
-# Install sudo
-RUN apt-get install -y sudo
-
 # upgrade
 RUN apt-get -y upgrade
 
-# fix sudo permissions - just in case
-RUN chmod u+s /usr/bin/sudo
-
 # Install basic packages.
 RUN apt-get install -y software-properties-common
-RUN apt-get install -y curl git htop unzip vim wget
+RUN apt-get install -y curl git htop unzip vim wget byobu
 
-# --> we don't need puppet for now
+# default scripts (will be used for all users except for root)
+ADD etc_skel/.gitconfig /etc/skel/.gitconfig
+ADD etc_skel/scripts /etc/skel/scripts
+ADD etc_skel/.bashrc /etc/skel/.bashrc
+
+# Add files for root - start run in /root/.bashrc
+ADD etc_skel/.gitconfig /root/.gitconfig
+ADD etc_skel/scripts /root/scripts
+ADD etc_skel/.bashrc /root/.bashrc
+# we want to run automatically run the run script
+RUN echo " " >> /root/.bashrc
+RUN echo "# add the run stuff" >> /root/.bashrc
+RUN echo "/usr/local/sbin/run" >> /root/.bashrc
+
+# --> puppet
 # Install puppet stuff
-#RUN apt-get install -y puppet librarian-puppet
+RUN apt-get install -y puppet librarian-puppet
 
 # puppet-librarian stuff
-#ADD /puppetfile/Puppetfile /
-#RUN librarian-puppet install
+ADD /puppetfile/Puppetfile /
+RUN librarian-puppet install
 #RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
-# <-- we don't need puppet for now
-
-# --> instead of puppet 
-RUN apt-get install -y byobu
-# <-- instead of puppet
-
-# create genius
-RUN useradd --create-home --home-dir /home/genius --shell /bin/bash genius
-RUN echo "genius:genius" | chpasswd
+# fix docker issues: (sudo permissions)
+RUN puppet apply --modulepath=/modules -e "class { 'docker_fixes': }"
+# create users: (genius, add to sudoers,..)
+RUN puppet apply --modulepath=/modules -e "class { 'yocto_users': ensure => present }"
+# ssh server: (I think there is a race condition with puppet)
+#RUN puppet apply --modulepath=/modules -e "class { 'ssh::server': }"
+# <-- puppet
  
-RUN mkdir -p /home/genius/.ssh; chown genius /home/genius/.ssh; chmod 700 /home/genius/.ssh
-#ADD ./authorized_keys /home/genius/.ssh/
-#ADD ./authorized_keys /genius/.ssh/
- 
-RUN echo "genius ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-# add genius specific config files
-ADD genius/.bashrc /home/genius/.bashrc
-ADD genius/.gitconfig /home/genius/.gitconfig
-ADD genius/scripts /home/genius/scripts
-
-RUN chown -R genius:genius /home/genius
- 
-# --> I don't seem to get the ssh stuff to work
+# --> I don't seem to get the ssh stuff to work from puppet
 # ssh stuff
 RUN apt-get install -y ssh
-RUN mkdir /var/run/sshd
-
 EXPOSE 22
-# <-- I don't seem to get the ssh stuff to work
+# <-- I don't seem to get the ssh stuff to work from puppet
  
 #CMD ["/usr/sbin/sshd", "-D"]
 
 # Add files for root - start run in /root/.bashrc
-ADD root/.bashrc /root/.bashrc
-ADD root/.gitconfig /root/.gitconfig
-ADD root/scripts /root/scripts
+# /etc/skel is not used for the root account
+#ADD root/.bashrc /root/.bashrc
+#ADD root/.gitconfig /root/.gitconfig
+#ADD root/scripts /root/scripts
 
 # fix sudo permissions
-RUN chmod u+s /usr/bin/sudo
-
-# Set environment variables.
-ENV HOME /root
-
-# Define working directory.
-WORKDIR /root
-
-# default user
-USER root
+#RUN chmod u+s /usr/bin/sudo
 
 ADD ./bin /usr/local/sbin
 RUN chmod +x /usr/local/sbin/run
+
+# Set environment variables.
+ENV HOME /root
+# Define working directory.
+WORKDIR /root
+# default user
+USER root
+
+# Set environment variables.
+#ENV HOME /home/genius
+# Define working directory.
+#WORKDIR /home/genius
+# default user
+#USER genius
+
 CMD ["/bin/bash"]
