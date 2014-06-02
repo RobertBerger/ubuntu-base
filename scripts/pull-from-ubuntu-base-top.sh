@@ -12,7 +12,7 @@ git checkout master
 
 echo "+ cd ${HERE}"
 
-for BRANCH in master devel phusion
+for BRANCH in master devel
 do
   echo "+ ----->"
   echo "+ cd ../../${PRJ}-top/${PRJ}-test/"
