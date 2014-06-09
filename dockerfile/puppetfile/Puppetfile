@@ -14,14 +14,14 @@ mod "justinclayton/sudo",
        :git => "https://github.com/justinclayton/puppet-module-sudo",
        :ref => "1.0.0"
 
+mod "puppetlabs/vcsrepo",
+       :git => "https://github.com/puppetlabs/puppetlabs-vcsrepo"
+
+mod "tohuwabohu/patch",
+       :git => "https://github.com/tohuwabohu/tohuwabohu-patch.git"
+
 mod "RobertBerger/yocto_users",
        :git => "https://github.com/RobertBerger/puppet-yocto-users"
-
-#mod "saz/ssh",
-#       :git => "https://github.com/saz/puppet-ssh"
-
-#mod "attachmentgenie/ssh",
-#       :git => "https://github.com/attachmentgenie/puppet-module-ssh"
 
 mod "RobertBerger/docker_fixes",
        :git => "https://github.com/RobertBerger/puppet-docker-fixes"
