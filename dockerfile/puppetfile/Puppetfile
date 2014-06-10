@@ -32,6 +32,3 @@ mod "RobertBerger/ssh",
 mod "RobertBerger/autobuilder_before_install",
        :git => "https://github.com/RobertBerger/puppet-autobuilder-before-install"
 
-mod "RobertBerger/autobuilder_after_install",
-       :git => "https://github.com/RobertBerger/puppet-autobuilder-after-install"
-
