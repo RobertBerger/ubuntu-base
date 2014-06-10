@@ -7,5 +7,5 @@ default user:
 username: genius
 password: genius
 
-tag: phusion_1
+tag: master
 
