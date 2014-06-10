@@ -28,3 +28,10 @@ mod "RobertBerger/docker_fixes",
 
 mod "RobertBerger/ssh",
        :git => "https://github.com/RobertBerger/puppet-ssh"
+
+mod "RobertBerger/autobuilder_before_install",
+       :git => "https://github.com/RobertBerger/puppet-autobuilder-before-install"
+
+mod "RobertBerger/autobuilder_after_install",
+       :git => "https://github.com/RobertBerger/puppet-autobuilder-after-install"
+
