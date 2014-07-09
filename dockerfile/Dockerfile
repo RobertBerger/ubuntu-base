@@ -72,11 +72,11 @@ RUN apt-get install -y xauth xterm
 
 # --> puppet
 # Install puppet stuff
-RUN apt-get install -y puppet librarian-puppet --verbose
+RUN apt-get install -y puppet librarian-puppet
 
 # puppet-librarian stuff
 ADD /puppetfile/Puppetfile /
-RUN librarian-puppet install
+RUN librarian-puppet install --verbose
 #RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
 # configure ssh server
 RUN puppet apply --modulepath=/modules -e "class { 'ssh': }"
