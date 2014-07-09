@@ -72,7 +72,7 @@ RUN apt-get install -y xauth xterm
 
 # --> puppet
 # Install puppet stuff
-RUN apt-get install -y puppet librarian-puppet
+RUN apt-get install -y puppet librarian-puppet --verbose
 
 # puppet-librarian stuff
 ADD /puppetfile/Puppetfile /
