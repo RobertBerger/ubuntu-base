@@ -2,33 +2,33 @@ forge "http://forge.puppetlabs.com"
 
 #mod "adamstrawson/byobu",
 #       :git => "https://github.com/adamstrawson/puppet-byobu"
-
-mod "hercules-team/augeasproviders",
-       :git => "https://github.com/hercules-team/augeasproviders"
        
-mod "torrancew/account",
+mod "account",
        :git => "https://github.com/torrancew/puppet-account",
        :ref => 'v0.0.5'
 
-mod "justinclayton/sudo",
+mod "sudo",
        :git => "https://github.com/justinclayton/puppet-module-sudo",
        :ref => "1.0.0"
 
-mod "puppetlabs/vcsrepo",
+mod "vcsrepo",
        :git => "https://github.com/puppetlabs/puppetlabs-vcsrepo"
 
-mod "tohuwabohu/patch",
+mod "patch",
        :git => "https://github.com/tohuwabohu/tohuwabohu-patch.git"
 
-mod "RobertBerger/yocto_users",
+mod "yocto_users",
        :git => "https://github.com/RobertBerger/puppet-yocto-users"
 
-mod "RobertBerger/docker_fixes",
+mod "docker_fixes",
        :git => "https://github.com/RobertBerger/puppet-docker-fixes"
 
-mod "RobertBerger/ssh",
+mod "ssh",
        :git => "https://github.com/RobertBerger/puppet-ssh"
 
-mod "RobertBerger/autobuilder_before_install",
+mod "autobuilder_before_install",
        :git => "https://github.com/RobertBerger/puppet-autobuilder-before-install"
 
+# needs to be at the end - unresolved dependencies otherwise
+mod "augeasproviders",
+       :git => "https://github.com/hercules-team/augeasproviders"
