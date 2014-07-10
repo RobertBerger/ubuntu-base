@@ -15,7 +15,7 @@ mod "vcsrepo",
        :git => "https://github.com/puppetlabs/puppetlabs-vcsrepo"
 
 mod "patch",
-       :git => "https://github.com/tohuwabohu/tohuwabohu-patch.git"
+       :git => "https://github.com/RobertBerger/puppet-patch"
 
 mod "yocto_users",
        :git => "https://github.com/RobertBerger/puppet-yocto-users"
