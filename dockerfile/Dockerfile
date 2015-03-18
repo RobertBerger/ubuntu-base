@@ -14,6 +14,8 @@ ENV HOME /root
 RUN echo exit 0 > /usr/sbin/policy-rc.d
 RUN chmod +x /usr/sbin/policy-rc.d
 
+# enable sshd
+RUN rm -f /etc/service/sshd/down
 # Regenerate SSH host keys. baseimage-docker does not contain any, so you
 # have to do that yourself. You may also comment out this instruction; the
 # init system will auto-generate one during boot.
@@ -79,7 +81,8 @@ ADD /puppetfile/Puppetfile /
 RUN librarian-puppet install --verbose
 #RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
 # configure ssh server
-RUN puppet apply --modulepath=/modules -e "class { 'ssh': }"
+# looks like with newer ubuntu baseimage it works also without this
+#RUN puppet apply --modulepath=/modules -e "class { 'ssh': }"
 # fix docker issues: (sudo permissions)
 RUN puppet apply --modulepath=/modules -e "class { 'docker_fixes': }"
 # create users: (genius, add to sudoers,..)
