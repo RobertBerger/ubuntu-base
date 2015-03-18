@@ -75,14 +75,15 @@ RUN apt-get install -y xauth xterm
 # --> puppet
 # Install puppet stuff
 RUN apt-get install -y puppet librarian-puppet
+# install augeasproviders_ssh
+RUN puppet module install herculesteam/augeasproviders_ssh
 
 # puppet-librarian stuff
 ADD /puppetfile/Puppetfile /
 RUN librarian-puppet install --verbose
 #RUN puppet apply --modulepath=/modules -e "class { 'byobu': }"
 # configure ssh server
-# looks like with newer ubuntu baseimage it works also without this
-#RUN puppet apply --modulepath=/modules -e "class { 'ssh': }"
+RUN puppet apply --modulepath=/modules -e "class { 'ssh': }"
 # fix docker issues: (sudo permissions)
 RUN puppet apply --modulepath=/modules -e "class { 'docker_fixes': }"
 # create users: (genius, add to sudoers,..)
