@@ -72,6 +72,10 @@ ADD etc_my_init.d/01_create_tun.sh /etc/my_init.d/01_create_tun.sh
 RUN apt-get install -y xauth xterm
 # <-- xterm
 
+# --> lzop
+RUN apt-get install -y lzop
+# <-- lzop
+
 # --> puppet
 # Install puppet stuff
 RUN apt-get install -y puppet librarian-puppet
