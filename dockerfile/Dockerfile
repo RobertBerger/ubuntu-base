@@ -3,7 +3,8 @@
 # to `latest`! See
 # https://github.com/phusion/baseimage-docker/blob/master/Changelog.md
 # for a list of version numbers.
-FROM phusion/baseimage:0.9.16
+#FROM phusion/baseimage:0.9.16 - working
+FROM phusion/baseimage:0.9.17
 
 # Set correct environment variables.
 ENV HOME /root
@@ -67,6 +68,13 @@ ADD etc_my_init.d/01_create_tun.sh /etc/my_init.d/01_create_tun.sh
 #RUN echo " " >> /root/.bashrc
 #RUN echo "# add the run stuff" >> /root/.bashrc
 #RUN echo "/usr/local/sbin/run" >> /root/.bashrc
+
+# tools I use
+RUN sudo apt-get install -y pv tree xdot
+
+# use bash instead of dash
+RUN echo "dash dash/sh boolean false" | debconf-set-selections
+RUN dpkg-reconfigure -f noninteractive dash
 
 # --> xterm
 RUN apt-get install -y xauth xterm
