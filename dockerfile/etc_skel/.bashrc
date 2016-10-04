@@ -30,9 +30,9 @@ alias vi='vim'
 alias ls="ls -ph --color=auto"
 
 # Colorize grep
-if echo hello|grep --color=auto l >/dev/null 2>&1; then
-  export GREP_OPTIONS="--color=auto" GREP_COLOR="1;31"
-fi
+#if echo hello|grep --color=auto l >/dev/null 2>&1; then
+#  export GREP_OPTIONS="--color=auto" GREP_COLOR="1;31"
+#fi
 
 # Shell
 export CLICOLOR="1"
