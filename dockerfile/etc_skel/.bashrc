@@ -50,3 +50,8 @@ source ~/scripts/git-completion.sh
 
 # Z
 source ~/scripts/z.sh
+
+# use a locale setting which supports utf-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
