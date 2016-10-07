@@ -57,11 +57,13 @@ RUN apt-get install -y curl git htop unzip vim wget byobu
 ADD etc_skel/.gitconfig /etc/skel/.gitconfig
 ADD etc_skel/scripts /etc/skel/scripts
 ADD etc_skel/.bashrc /etc/skel/.bashrc
+ADD etc_skel/.vim    /etc/skel/.vim
 
 # Add files for root - start run in /root/.bashrc
 ADD etc_skel/.gitconfig /root/.gitconfig
 ADD etc_skel/scripts /root/scripts
 ADD etc_skel/.bashrc /root/.bashrc
+ADD etc_skel/.vim    /root/.vim
 
 # Add one time startup script to create tun interface for qemu
 ADD etc_my_init.d/01_create_tun.sh /etc/my_init.d/01_create_tun.sh
