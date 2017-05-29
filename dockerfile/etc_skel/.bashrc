@@ -49,6 +49,11 @@ source ~/scripts/git-completion.sh
 # Z
 source ~/scripts/z.sh
 
+# yocto.sh
+if [ -f ~/nonvol-scripts/yocto.sh ]; then
+   source ~/nonvol-scripts/yocto.sh
+fi
+
 # use a locale setting which supports utf-8
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

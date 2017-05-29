@@ -6,7 +6,9 @@
 #FROM phusion/baseimage:0.9.16 - working
 #FROM phusion/baseimage:0.9.17 - working
 #FROM phusion/baseimage:0.9.18 - working
-FROM phusion/baseimage:0.9.19
+#FROM phusion/baseimage:0.9.19 - working
+#FROM phusion/baseimage:0.9.21 - was working ;)
+FROM phusion/baseimage:0.9.22
 
 # Set correct environment variables.
 ENV HOME /root
@@ -68,6 +70,9 @@ ADD etc_skel/.vim    /root/.vim
 # Add one time startup script to create tun interface for qemu
 ADD etc_my_init.d/01_create_tun.sh /etc/my_init.d/01_create_tun.sh
 
+# Add killall_bitbake script
+ADD usr/local/bin/killall_bitbake.sh /usr/local/bin/killall_bitbake.sh
+
 # we want to run automatically run the run script
 #RUN echo " " >> /root/.bashrc
 #RUN echo "# add the run stuff" >> /root/.bashrc
@@ -87,6 +92,10 @@ RUN sudo apt-get install -y xauth xterm
 # --> lzop
 RUN apt-get install -y lzop
 # <-- lzop
+
+# --> tiptop
+RUN apt-get install -y tiptop
+# <-- toptop
 
 # --> puppet
 # Install puppet stuff
